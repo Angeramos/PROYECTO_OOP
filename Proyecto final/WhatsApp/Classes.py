@@ -12,8 +12,9 @@ class Restaurant():
         for x,y in self.Menu.items():
             texto = texto + "{}. {} {}\n".format(x, self.Menu[x][0], self.Menu[x][1])
         return texto
+
 class UsersData():
-    def __init__(self):
+    def __init__(self): 
         self.usersDict = {}
     def addBalance(self, user, newBalance):
         if user in self.usersDict:
@@ -34,9 +35,30 @@ class UsersData():
             msg = "El usuario no existe\n"
         return msg 
 
+class Codes:
+    def __init__(self):
+        self.usedCodes = []
+    def useCode(self, code):
+        codeDigits = []
+        verif = False   
+        codeDigits.extend(code) 
+        codeValue = 0
+        if codeDigits[0] == "1" and len(codeDigits) == 6:
+            codeValue = "10000"
+            verif = True
+            self.usedCodes.append(code)
+        elif codeDigits[0] == "2" and len(codeDigits) == 6:
+            codeValue = "20000"
+            verif = True
+            self.usedCodes.append(code)
+        elif codeDigits[0] == "5" and len(codeDigits) == 6:
+            codeValue = "50000"
+            verif = True
+            self.usedCodes.append(code)
+        else: 
+            codeValue = "Codigo no valido"
+        return verif,codeValue 
 
 Terrase = Restaurant("Terrase")
 Terrase.updtMenu("MenuTerrasse", ".csv")
 
-
-        

@@ -5,11 +5,12 @@ import pyperclip
 import Classes
 from Classes import UsersData
 sleep (3)
-#gets message           
+
 class buscador: 
+    #gets message  
     def barra_mensajes(self):
         global x, y
-        position2 = pt.locateOnScreen("barra_mensajes.png", confidence=.6) #este métpodo es propio dE Python 
+        position2 = pt.locateOnScreen("barra_mensajes2.png", confidence=.6) #este métpodo es propio dE Python 
         x = position2 [0]
         y = position2 [1]
         pt.moveTo(x,y, duration=0.5)
@@ -18,20 +19,30 @@ class buscador:
         pt.click()
         
 
-    #escribir
     def sendMsg(self, texto:str):
+        #escribir
+        c = ""
         pt.doubleClick
-        pt.typewrite (texto, interval=.03)
-        pt.click()
+        for a in texto: 
+            if a != "\n":
+                c = c + a
+                
+            else:
+                pt.typewrite (c, interval=.003)
+                c = ""
+                pt.hotkey("shift", "enter")
+            
+        pt.press("enter")
 
-    ##def searchTextBubble():
-        ##global x, y
-        ##position2 = pt.locateOnScreen("WhatsApp/barra_mensajes.png", confidence=.6) #este métpodo es propio dE Python 
-        #3x = position2 [0]
-        ##y = position2 [1]
-        ##pt.moveTo(x,y, duration=0.5)
-        ##pt.moveTo(x,y, duration=.5)
-        ##pt.moveTo(x+200, y-(-0), duration=.5)
+    def searchTextBubble():
+        global x, y
+        position2 = pt.locateOnScreen("WhatsApp/barra_mensajes2.png", confidence=.6) #este métpodo es propio dE Python 
+        x = position2 [0]
+        y = position2 [1]
+        pt.moveTo(x,y, duration=0.5)
+        pt.moveTo(x,y, duration=.5)
+        pt.moveTo(x+200, y-(-0), duration=.5)
+
     def readMsg(self):
         sleep (5)
         pt.moveTo(x+59, y-65, duration=.5)
@@ -64,30 +75,11 @@ while chatOn:
         num = searcher.readMsg()
         Users.usersDict.update({num: 0})
         print(Users.usersDict)
-
-
     elif wpp_message == "3" and wait == True:
         searcher.sendMsg("Coming Soon")
     elif wpp_message == "4" and wait == True:
         chatOn = False
         searcher.sendMsg("Muchas Gracias!\n")
 
-
-    
-
-
-
-#class interacción():
-#sleep (5)
-#position1 = pt.locateOnScreen("WhatsApp/combo_terrase.png", confidence=.6)
-#x = position1 [0]
-#y = position1 [1]
-
-#class interactuar: 
-#    def leer(self):
-
-
-#searcher = interactuar()
-#searcher.leer()
 
 
