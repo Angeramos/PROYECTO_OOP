@@ -7,36 +7,22 @@ from Classes import UsersData
 sleep (3)
 
 class buscador: 
-    #gets message  
-    def barra_mensajes(self):
-        global x, y
-        position2 = pt.locateOnScreen("barra_mensajes2.png", confidence=.6) #este métpodo es propio dE Python 
-        x = position2 [0]
-        y = position2 [1]
-        pt.moveTo(x,y, duration=0.5)
-        pt.moveTo(x,y, duration=.5)
-        pt.moveTo(x+200, y-(-0), duration=.5)
-        pt.click()
-        
-
     def sendMsg(self, texto:str):
-        #escribir
+        buscador.searchTextBubble()
         c = ""
         pt.doubleClick
         for a in texto: 
             if a != "\n":
                 c = c + a
-                
             else:
                 pt.typewrite (c, interval=.003)
                 c = ""
                 pt.hotkey("shift", "enter")
-            
         pt.press("enter")
-
+        
     def searchTextBubble():
         global x, y
-        position2 = pt.locateOnScreen("WhatsApp/barra_mensajes2.png", confidence=.6) #este métpodo es propio dE Python 
+        position2 = pt.locateOnScreen("WhatsApp/barra_mensajes.png", confidence=.6) 
         x = position2 [0]
         y = position2 [1]
         pt.moveTo(x,y, duration=0.5)
@@ -45,10 +31,10 @@ class buscador:
 
     def readMsg(self):
         sleep (5)
+        buscador.searchTextBubble()
         pt.moveTo(x+59, y-65, duration=.5)
         pt.tripleClick()
         pt.rightClick()
-
         sleep (1)
         pt.moveTo(x+100, y-45, duration=.5)
         pt.click()
@@ -60,14 +46,24 @@ chatOn = True
 searcher = buscador()
 Users = Classes.UsersData()
 
-while chatOn:
-    searcher.barra_mensajes()
-    searcher.sendMsg("Bienvenido! Que desea ordenar?\n")
-    searcher.sendMsg("1. Realizar pedido\n2. Crear usuario\n3.Ver saldo\n4.Salir\n")
-    searcher.readMsg()  
-    wpp_message = pyperclip.paste()
-    print ("Mensaje recibido: " + wpp_message)
-    wait = True
+
+
+def createUser():
+    searcher.sendMsg("Desea crear cuenta de usuario o domiciliario?\n 1. Usuario\n 2. Domiciliario\n")
+    a = searcher.readMsg()
+    searcher.searchTextBubble()
+    searcher.sendMsg("Digite su numero")
+    num = searcher.readMsg()
+    if a == "1":
+        Users.usersDict.update({num: 0})
+    if a == "2":
+        pass
+
+while __name__ == "__main__":
+    searcher.searchTextBubble()
+    searcher.sendMsg("Bienvenido!\n1. Realizar pedido\n2. Crear usuario\n3. Ver saldo\n4. Salir\n")
+    
+    wait = False
     if wpp_message == "1" and wait == True:
         searcher.sendMsg(Classes.Terrase.showMenu())
     elif wpp_message == "2" and wait == True:
@@ -80,6 +76,10 @@ while chatOn:
     elif wpp_message == "4" and wait == True:
         chatOn = False
         searcher.sendMsg("Muchas Gracias!\n")
+    else:
+        wpp_message = searcher.readMsg()
+        if wpp_message != None:
+            wait = True
 
 
 
