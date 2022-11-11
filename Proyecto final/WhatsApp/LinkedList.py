@@ -66,5 +66,23 @@ def fillUserList(list):
         list.AddUserNode(a[0], a[1], a[2]) 
     f.close()
 
-Prueba = LinkedListUser()
-fillUserList(Prueba)
+def addUserToFile(file, data, Name, Wallet):
+    f = open(file, "a")
+    f.write("\n")
+    f.write(data +","+ Name + "," + Wallet) 
+    f.close()
+
+def updtFile(file, search, newData):#, replace):
+    f = open(file, "r")
+    for line in f.readlines():
+        a = line.split(",")
+        if a[0] == search:
+            print(a[0])
+            break
+    with open(file, "r") as f:
+        data = f.read()
+        data = data.replace(a[0]+","+a[1]+","+a[2], a[0]+","+a[1]+","+newData + "\n")
+    with open(file, "w") as f:
+        f.write(data)
+
+

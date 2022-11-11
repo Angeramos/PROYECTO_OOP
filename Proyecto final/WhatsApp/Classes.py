@@ -60,5 +60,5 @@ class Codes:
         return verif,codeValue 
 
 Terrase = Restaurant("Terrase")
-Terrase.updtMenu("MenuTerrasse", ".csv")
+Terrase.updtMenu("PROYECTO_OOP\Proyecto final\WhatsApp\MenuTerrasse", ".csv")
 
