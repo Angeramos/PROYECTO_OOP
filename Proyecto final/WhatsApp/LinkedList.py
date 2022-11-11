@@ -43,8 +43,8 @@ class LinkedList:
         return respuesta
 
 class LinkedListUser(LinkedList):
-    def AddUserNode(self, data, Name):
-        P = Usuario(data, Name)
+    def AddUserNode(self, data, Name, Wallet):
+        P = Usuario(data, Name, Wallet)
         if (self.PTR == None):
             self.PTR = P
             self.ULT = P 
@@ -58,11 +58,13 @@ class LinkedListUser(LinkedList):
             P = P.next
         return P
     
-    def fillUserList(list):
-        f = open(r"Proyecto final\WhatsApp\Archivos\Users.csv", "r")
-        for line in f.readlines():
-            a = line.split(",")
-            print(a[0], a[1], a[2])
-            list.AddUserNode(a[0], a[1], a[2]) 
+def fillUserList(list):
+    f = open(r"PROYECTO_OOP\Proyecto final\WhatsApp\users.csv", "r")
+    for line in f.readlines():
+        a = line.split(",")
+        print(a[0], a[1], a[2])
+        list.AddUserNode(a[0], a[1], a[2]) 
+    f.close()
 
-
+Prueba = LinkedListUser()
+fillUserList(Prueba)
