@@ -53,12 +53,18 @@ def createUser():
     searcher.sendMsg("Desea crear cuenta de usuario o domiciliario?\n 1. Usuario\n 2. Domiciliario\n")
     a = searcher.readMsg()
     searcher.searchTextBubble()
-    searcher.sendMsg("Digite su numero")
-    num = searcher.readMsg()
-    if a == "1":
-        Users.usersDict.update({num: 0})
-    if a == "2":
-        pass
+    searcher.sendMsg("Digite su codigo estudiantil")
+    CE = searcher.readMsg()
+    Users.search(CE)
+    if CE != None:
+        if a == "1":
+            searcher.sendMsg("Como es su nombre?")
+            Name = searcher.readMsg()
+            Users.AddUserNode(CE, Name)
+        if a == "2":
+            pass
+    else:
+        searcher.sendMsg("El usuario ya existe")
 
 while __name__ == "__main__":
     #main

@@ -41,13 +41,28 @@ class LinkedList:
             P = P.next
         respuesta = respuesta + "None"
         return respuesta
-    def AddUserNode(self, data, Name, Wallet):
-        P = Usuario(data, Name, Wallet)
+
+class LinkedListUser(LinkedList):
+    def AddUserNode(self, data, Name):
+        P = Usuario(data, Name)
         if (self.PTR == None):
             self.PTR = P
             self.ULT = P 
         else:
             self.ULT.next = P
-            self.ULT = P       
+            self.ULT = P
+
+    def search(self, data):
+        P = self.PTR
+        while P.data != data:
+            P = P.next
+        return P
+    
+    def fillUserList(list):
+        f = open(r"Proyecto final\WhatsApp\Archivos\Users.csv", "r")
+        for line in f.readlines():
+            a = line.split(",")
+            print(a[0], a[1], a[2])
+            list.AddUserNode(a[0], a[1], a[2]) 
 
 
