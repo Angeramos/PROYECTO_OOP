@@ -4,6 +4,7 @@ from time import sleep
 import pyperclip
 import Classes
 from Classes import UsersData
+import LinkedList
 sleep (3)
 
 class buscador: 
@@ -11,7 +12,7 @@ class buscador:
         #se encarga de enviar el mensaje
         buscador.searchTextBubble()
         c = ""
-        pt.doubleClick
+        pt.doubleClick()
         for a in texto: 
             if a != "\n":
                 c = c + a
@@ -24,7 +25,7 @@ class buscador:
     def searchTextBubble():
         #busca la imagen de texto 
         global x, y
-        position2 = pt.locateOnScreen("WhatsApp/barra_mensajes.png", confidence=.6) 
+        position2 = pt.locateOnScreen(r"PROYECTO_OOP\Proyecto final\WhatsApp\barra_mensajes.png", confidence=.6) 
         x = position2 [0]
         y = position2 [1]
         pt.moveTo(x,y, duration=0.5)
@@ -35,7 +36,7 @@ class buscador:
         #lee el mensaje 
         sleep (5)
         buscador.searchTextBubble()
-        pt.moveTo(x+59, y-65, duration=.5)
+        pt.moveTo(x+65, y-65, duration=.5)
         pt.tripleClick()
         pt.rightClick()
         sleep (1)
@@ -46,39 +47,42 @@ class buscador:
         return msg
 
 searcher = buscador()
-Users = Classes.UsersData()
-
+Users = LinkedList.LinkedListUser()
+LinkedList.fillUserList(Users)
 def createUser():
     #crea el usuario
     searcher.sendMsg("Desea crear cuenta de usuario o domiciliario?\n 1. Usuario\n 2. Domiciliario\n")
     a = searcher.readMsg()
-    searcher.searchTextBubble()
-    searcher.sendMsg("Digite su codigo estudiantil")
+    searcher.searchTextBubble
+    searcher.sendMsg("Digite su codigo estudiantil\n")
     CE = searcher.readMsg()
-    Users.search(CE)
-    if CE != None:
-        if a == "1":
-            searcher.sendMsg("Como es su nombre?")
-            Name = searcher.readMsg()
-            Users.AddUserNode(CE, Name)
-        if a == "2":
-            pass
-    else:
+    try:
+        Users.search(CE)
+        if CE != None:
+            if a == "1":
+                searcher.sendMsg("Como es su nombre?\n")
+                Name = searcher.readMsg()
+                Users.AddUserNode(CE, Name, "0")
+                LinkedList.addUserToFile(r"PROYECTO_OOP\Proyecto final\WhatsApp\users.csv", CE, Name, "0")
+            if a == "2":
+                pass
+        else:
+            searcher.sendMsg("El usuario ya existe")
+    except AttributeError:
         searcher.sendMsg("El usuario ya existe")
+    
 
 while __name__ == "__main__":
     #main
-    searcher.searchTextBubble()
+    searcher.searchTextBubble
     searcher.sendMsg("Bienvenido!\n1. Realizar pedido\n2. Crear usuario\n3. Ver saldo\n4. Salir\n")
-    
     wait = False
+    wpp_message = searcher.readMsg()
+    wait = True
     if wpp_message == "1" and wait == True:
         searcher.sendMsg(Classes.Terrase.showMenu())
     elif wpp_message == "2" and wait == True:
-        searcher.sendMsg("Digite su numero\n")
-        num = searcher.readMsg()
-        Users.usersDict.update({num: 0})
-        print(Users.usersDict)
+        createUser()
     elif wpp_message == "3" and wait == True:
         searcher.sendMsg("Coming Soon")
     elif wpp_message == "4" and wait == True:
@@ -86,8 +90,7 @@ while __name__ == "__main__":
         searcher.sendMsg("Muchas Gracias!\n")
     else:
         wpp_message = searcher.readMsg()
-        if wpp_message != None:
-            wait = True
+        wait = False
 
 
 
