@@ -8,6 +8,7 @@ sleep (3)
 
 class buscador: 
     def sendMsg(self, texto:str):
+        #se encarga de enviar el mensaje
         buscador.searchTextBubble()
         c = ""
         pt.doubleClick
@@ -21,6 +22,7 @@ class buscador:
         pt.press("enter")
         
     def searchTextBubble():
+        #busca la imagen de texto 
         global x, y
         position2 = pt.locateOnScreen("WhatsApp/barra_mensajes.png", confidence=.6) 
         x = position2 [0]
@@ -30,6 +32,7 @@ class buscador:
         pt.moveTo(x+200, y-(-0), duration=.5)
 
     def readMsg(self):
+        #lee el mensaje 
         sleep (5)
         buscador.searchTextBubble()
         pt.moveTo(x+59, y-65, duration=.5)
@@ -42,13 +45,11 @@ class buscador:
         print("Mensaje recibido ", msg)
         return msg
 
-chatOn = True
 searcher = buscador()
 Users = Classes.UsersData()
 
-
-
 def createUser():
+    #crea el usuario
     searcher.sendMsg("Desea crear cuenta de usuario o domiciliario?\n 1. Usuario\n 2. Domiciliario\n")
     a = searcher.readMsg()
     searcher.searchTextBubble()
@@ -60,6 +61,7 @@ def createUser():
         pass
 
 while __name__ == "__main__":
+    #main
     searcher.searchTextBubble()
     searcher.sendMsg("Bienvenido!\n1. Realizar pedido\n2. Crear usuario\n3. Ver saldo\n4. Salir\n")
     

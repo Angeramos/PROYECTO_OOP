@@ -1,4 +1,4 @@
-class Restaurant():
+class Restaurant:
     def __init__(self, name):
         self.name = name
         self.Menu = {}
@@ -13,7 +13,7 @@ class Restaurant():
             texto = texto + "{}. {} {}\n".format(x, self.Menu[x][0], self.Menu[x][1])
         return texto
 
-class UsersData():
+class UsersData:
     def __init__(self): 
         self.usersDict = {}
     def addBalance(self, user, newBalance):
