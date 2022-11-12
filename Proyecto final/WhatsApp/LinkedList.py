@@ -51,18 +51,29 @@ class LinkedListUser(LinkedList):
         else:
             self.ULT.next = P
             self.ULT = P
-
     def search(self, data):
         P = self.PTR
         while P.data != data:
             P = P.next
         return P
-    
+    def showBalance(self, data):
+        P = self.PTR
+        try: 
+            while P.data != None:
+            
+                if P.data == data :
+                    a = P.Wallet
+                    break
+                P = P.next
+            
+        except AttributeError:
+                a = "El usuario no existe"
+        return a
+
 def fillUserList(list):
     f = open(r"PROYECTO_OOP\Proyecto final\WhatsApp\users.csv", "r")
     for line in f.readlines():
         a = line.split(",")
-        print(a[0], a[1], a[2])
         list.AddUserNode(a[0], a[1], a[2]) 
     f.close()
 
@@ -72,7 +83,7 @@ def addUserToFile(file, data, Name, Wallet):
     f.write(data +","+ Name + "," + Wallet) 
     f.close()
 
-def updtFile(file, search, newData):#, replace):
+def updtFile(file, search, newData):
     f = open(file, "r")
     for line in f.readlines():
         a = line.split(",")
@@ -85,4 +96,7 @@ def updtFile(file, search, newData):#, replace):
     with open(file, "w") as f:
         f.write(data)
 
+a = LinkedListUser()
 
+fillUserList(a)
+print(a.showBalance("49857084"))
