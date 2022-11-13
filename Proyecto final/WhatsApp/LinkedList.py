@@ -2,13 +2,13 @@ class Nodo:
     def __init__(self, data):
         self.data = data
         self.next = None
-
+        self.cart = LinkedListCart()
     def __repr__(self):
         return str(self.data)
 
 class Usuario(Nodo):
-    def _init_(self, data, Name, Wallet): 
-        super()._init_(data)
+    def __init__(self, data, Name, Wallet):
+        super().__init__(data)
         self.Name = Name
         self.Wallet = Wallet
         self.cart = LinkedListCart()
@@ -80,7 +80,7 @@ class LinkedListUser(LinkedList):
         P = Usuario(data, Name, Wallet)
         if (self.PTR == None):
             self.PTR = P
-            self.ULT = P 
+            self.ULT = P
         else:
             self.ULT.next = P
             self.ULT = P
@@ -91,27 +91,28 @@ class LinkedListUser(LinkedList):
         return P
     def showBalance(self, data):
         P = self.PTR
-        try: 
+        try:
             while P.data != None:
-            
+           
                 if P.data == data :
                     a = P.Wallet
                     break
                 P = P.next
-            
+           
         except AttributeError:
-                a = "El usuario no existe"
+            a = "El usuario no existe"
         return a
     def fillUserList(self):
-        f = open(r"PROYECTO_OOP\Proyecto final\WhatsApp\users.csv", "r")
+        f = open(r"Proyecto final\WhatsApp\users.csv", "r")
         for line in f.readlines():
             a = line.split(",")
-            self.AddUserNode(a[0], a[1], a[2]) 
+            self.AddUserNode(a[0], a[1], a[2])
         f.close()
-    def addUserToFile(file, data, Name, Wallet):
+    def addUserToFile(file, list):
+        P = list.ULT
         f = open(file, "a")
         f.write("\n")
-        f.write(data +","+ Name + "," + Wallet) 
+        f.write(P.data + "," + P.Name + ',' + P.Wallet)
         f.close()
     def updtFile(file, search, newData):
         f = open(file, "r")
@@ -119,7 +120,7 @@ class LinkedListUser(LinkedList):
             a = line.split(",")
             if a[0] == search:
                 print(a[0])
-            break
+                break
         with open(file, "r") as f:
             data = f.read()
             data = data.replace(a[0]+","+a[1]+","+a[2], a[0]+","+a[1]+","+newData + "\n")
@@ -127,14 +128,14 @@ class LinkedListUser(LinkedList):
                 f.write(data)
 
 class Items(Nodo):
-    def _init_(self, number, data, price):
-        super()._init_(data)
+    def __init__(self, number, data, price):
+        super().__init__(data)
         self.number = number
         self.price = price
 
 class Cart(Nodo):
-    def _init_(self, data, price):
-        super()._init_(data)
+    def __init__(self, data, price):
+        super().__init__(data)
         self.price = price
 
 class LinkedListCart(LinkedList):
@@ -156,3 +157,8 @@ class LinkedListMenu(LinkedList):
         else:
             self.ULT.next = P
             self.ULT = P
+
+a = LinkedListUser()
+a.fillUserList()
+a.PTR.cart.AddNodeCart("Perro", "1000")
+print(a.PTR.cart)
