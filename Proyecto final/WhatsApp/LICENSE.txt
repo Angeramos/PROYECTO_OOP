@@ -1,0 +1,21 @@
+Licencia MIT
+
+Copyright ( c ) [ 2022 ] [ Camilo Andrés Del Toro Trillos & Anghely Andrea Ramos Estevez ]
+
+Se otorga el permiso, de forma gratuita, a cualquier persona que obtenga una copia.
+de este software y archivos de documentación asociados ( el "Software" ), para tratar
+en el Software sin restricción, incluidos, entre otros, los derechos
+para usar, copiar, modificar, fusionar, publicar, distribuir, sublicenciar y / o vender
+copias del Software y para permitir a las personas para quienes es el Software
+amueblado para hacerlo, sujeto a las siguientes condiciones:
+
+El aviso de copyright anterior y este aviso de permiso se incluirán en todos
+copias o partes sustanciales del Software.
+
+EL SOFTWARE SE PROPORCIONA "COMO ES", SIN GARANTÍA DE NINGÚN TIPO, EXPRESO O
+IMPLIADO, INCLUYENDO PERO NO LIMITADO A LAS GARANTÍAS DE LA MERCANTABILIDAD,
+APTITUD PARA UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN EVENTO DEBERÁ EL
+LOS AUTORES O LOS TITULARES DE DERECHOS DE AUTORIDAD SON RESPONSABLES DE CUALQUIER RECLAMO, DAÑOS U OTROS
+RESPONSABILIDAD, EN UNA ACCIÓN DE CONTRATO, TORT O DE OTRA MANERA, DESDE,
+FUERA O EN RELACIÓN CON EL SOFTWARE O EL USO O OTROS TRATADOS EN EL
+SOFTWARE.

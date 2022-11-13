@@ -1,19 +1,30 @@
 # PROYECTO_OOP
 
-**Descripción:**
+#**Descripción:**
 
-*En este proyecto, estamos utilizando librerias propias de Python que nos ayudan al manejo del mouse de manera autonoma para contestarle a las personas que deseen realizar un pedido, o recibirlo dependiendo de qué tipo de usuario seas. Te pide un códifgo para registrarte, y luego sólo se debe interactuar con un menú muy sencillo,en el que la manera de comunicarse es a través de números.*
+*En este proyecto, desarrollamos un ChatBot de WhatsApp, con ayuda de diferentes librerías que nos ayudaron con la movilidad del mouse de forma autónoma. Este ChatBot hace el papel de una aplicación de domicilios. El usuario puede escoger entre ser cliente y domiciliario, y dependiendo de su opción saldrán diferentes menús en donde podrá escoger las opciones deseadas a través de números.*
+*Es un proyecto muy sencillo, que ha sido desarrollado para la clase Programación Orientada a Objetos dictada por José David Posada Aguilar, en la Universidad del Norte.*
 
 
-**Dependencias e Instalación:** 
+#**Dependencias e Instalación:** 
+*Para poder utilizar este código, se necesita previamente la versión 3.9.12 de Python y tener instalada la aplicación de escritorio de WhatsApp (El código está diseñado para poder utilizarse con las dos últimas versiones. Sn embargo con la última versión es menos eficiente, ya que ésta es demasiado nueva y la conocimos luego de haber empezado el proyecto)*
 
-*Para poder utilizar el código se necesita previamente la versión 3.9.12 de Python y tener la aplicación de escritorio de WhatsAPP (El codigo está diseñado para poder utilizarse con las dos últimas versiones, sin embargo _es recomendable utilizarlo con la anterior, ya que la última al ser tan nueva no es tan eficiente_. Teniendo en cuenta que cuando se inició el proyecto no había salido la última versión).*  
-
-**librerias necesarias:** *pyautogui, time, pyperclip.*
+##**librerias necesarias:** *pyautogui, time, pyperclip.*
 
 **Cómo correr el código:**
 
-*Ejecutar en Visual el módulo llamado mainbot.py, y abrir la ventana de WhatsApp Web (como las pruebas se han hecho en la última versión, _si desea usar la version anterior debe cambiar la ruta del archivo_ colocando "barra_mensajes.png")*
+*Para correr este código debe clonar el presente repositorio, tener previamente abierta la aplicación de WhatsApp escritorio con el chat del usuario que desea atender y ejecutar en VisualStudioCode, o el editor de código de su preferencia el módulo llamado mainbot.py, por último abrir la ventana de WhatsApp con alt + tap.*
 
-**Atribuciones:** 
+#**Atribuciones:** 
+
+*Para el manejo y la comprensión de la librería Pyautogui, para el manejo autónomo del mouse usamos como referencia el siguiente video de youtube: 
+> https://youtu.be/J_7oiOSdP0c*
+
+#**Licencias** 
+
+*MIT*
+
+
+
+
 
