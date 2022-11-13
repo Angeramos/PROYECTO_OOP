@@ -18,7 +18,7 @@ class Usuario(Nodo):
         while P != None:
             Total = Total + int(P.price)
             P = P.next
-            return Total    
+        return Total    
 
 class LinkedList:
     def __init__(self):
@@ -33,23 +33,6 @@ class LinkedList:
         else:
             self.ULT.next = P
             self.ULT = P 
-        def search(self, data):
-            P = self.PTR
-            while P.data != data:
-                P = P.next
-            return P
-
-        def showBalance(self, data):
-            P = self.PTR
-        try: 
-            while P.data != None:   
-                if P.data == data :
-                    a = P.Wallet
-                    break
-                P = P.next
-        except AttributeError:
-                a = "El usuario no existe"
-        return a            
 
     def Recorrido(self):
         P = self.PTR
@@ -66,15 +49,7 @@ class LinkedList:
             P = P.next
         respuesta = respuesta + "None"
         return respuesta
-    def AddUserNode(self, data, Name, Wallet):
-        P = Usuario(data, Name, Wallet)
-        if (self.PTR == None):
-            self.PTR = P
-            self.ULT = P 
-        else:
-            self.ULT.next = P
-            self.ULT = P   
-
+    
 class LinkedListUser(LinkedList):
     def AddUserNode(self, data, Name, Wallet):
         P = Usuario(data, Name, Wallet)
@@ -157,8 +132,16 @@ class LinkedListMenu(LinkedList):
         else:
             self.ULT.next = P
             self.ULT = P
+    def fillMenu(self):
+            f = open(r"Proyecto final\WhatsApp\MenuTerrasse.csv", "r")
+            for line in f.readlines():
+                a = line.split(",")
+                self.AddNodeItem(a[0], a[1], a[2]) 
+            f.close()
 
 a = LinkedListUser()
+Terrase = LinkedListMenu()
+Terrase.fillMenu()
 a.fillUserList()
-a.PTR.cart.AddNodeCart("Perro", "1000")
+a.PTR.cart.AddNodeCart(Terrase.PTR.data, Terrase.PTR.price)
 print(a.PTR.cart)
