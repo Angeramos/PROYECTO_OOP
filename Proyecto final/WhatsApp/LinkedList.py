@@ -101,7 +101,7 @@ class LinkedListUser(LinkedList):
             data = data.replace(a[0]+","+a[1]+","+a[2], a[0]+","+a[1]+","+newData + "\n")
         with open(file, "w") as f:
                 f.write(data)
-
+    
 class Items(Nodo):
     def __init__(self, number, data, price):
         super().__init__(data)
@@ -144,4 +144,8 @@ Terrase = LinkedListMenu()
 Terrase.fillMenu()
 a.fillUserList()
 a.PTR.cart.AddNodeCart(Terrase.PTR.data, Terrase.PTR.price)
+
+a.PTR.Wallet = int(a.PTR.Wallet) - int(a.PTR.showCartTotal())
+
 print(a.PTR.cart)
+print(a.PTR.Wallet)
