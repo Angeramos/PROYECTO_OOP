@@ -1,4 +1,7 @@
 class Nodo:
+    """
+    Clase general de Nodo
+    """
     def __init__(self, data):
         self.data = data
         self.next = None
@@ -7,6 +10,9 @@ class Nodo:
         return str(self.data)
 
 class Usuario(Nodo):
+    """
+    Clase Usuario heredada de nodo, esta maneja los datos del usuario para luego insertarlos en una LinkedList
+    """
     def __init__(self, data, Name, Wallet):
         super().__init__(data)
         self.Name = Name
@@ -21,6 +27,9 @@ class Usuario(Nodo):
         return Total    
 
 class LinkedList:
+    """
+    Clase general de LinkedList
+    """
     def __init__(self):
         self.PTR = None
         self.ULT = None
@@ -53,6 +62,9 @@ class LinkedList:
         return respuesta
     
 class LinkedListUser(LinkedList):
+    """
+    LinkedList creada con el proposito de manejar los datos del usuario usando los nodos de tipo Usuario
+    """
     def AddUserNode(self, data, Name, Wallet):
         P = Usuario(data, Name, Wallet)
         if (self.PTR == None):
@@ -126,17 +138,26 @@ class LinkedListDomicilio (LinkedList):
 #--------------------------
 
 class Items(Nodo):
+    """
+    Clase Items heredada de Nodo, esta tiene guardados los datos de cada comida del menu
+    """
     def __init__(self, number, data, price):
         super().__init__(data)
         self.number = number
         self.price = price
 
 class Cart(Nodo):
+    """
+    Nodo de tipo Cart para guardar los items que escoja el usuario
+    """
     def __init__(self, data, price):
         super().__init__(data)
         self.price = price
 
 class LinkedListCart(LinkedList):
+    """
+    LinkedList para guardar los items que el usario tenga en su carrito mediante los nodos Cart
+    """
     def AddNodeCart(self, data, price):
         P = Cart(data, price)
         if (self.PTR == None):
@@ -147,6 +168,7 @@ class LinkedListCart(LinkedList):
             self.ULT = P
 
 class LinkedListMenu(LinkedList):
+    
     def AddNodeItem(self, number, data, price):
         P = Items(number, data, price)
         if (self.PTR == None):

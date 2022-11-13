@@ -2,8 +2,6 @@ from turtle import Terminator
 import pyautogui as pt
 from time import sleep 
 import pyperclip
-import Classes
-from Classes import UsersData
 import LinkedList
 sleep (3)
 
@@ -25,7 +23,7 @@ class buscador:
     def searchTextBubble():
         #busca la imagen de texto 
         global x, y
-        position2 = pt.locateOnScreen(r"PROYECTO_OOP\Proyecto final\WhatsApp\barra_mensajes.png", confidence=.6) 
+        position2 = pt.locateOnScreen(r"Proyecto final\WhatsApp\barra_mensajes.png", confidence=.6) 
         x = position2 [0]
         y = position2 [1]
         pt.moveTo(x,y, duration=0.5)
@@ -48,7 +46,7 @@ class buscador:
 
 searcher = buscador()
 Users = LinkedList.LinkedListUser()
-LinkedList.fillUserList(Users)
+Users.fillUserList()
 def createUser():
     #crea el usuario
     searcher.sendMsg("Desea crear cuenta de usuario o domiciliario?\n 1. Usuario\n 2. Domiciliario\n")
@@ -74,13 +72,14 @@ def createUser():
 
 while __name__ == "__main__":
     #main
+    print(Users)
     searcher.searchTextBubble
     searcher.sendMsg("Bienvenido!\n1. Realizar pedido\n2. Crear usuario\n3. Ver saldo\n4. Salir\n")
     wait = False
     wpp_message = searcher.readMsg()
     wait = True
     if wpp_message == "1" and wait == True:
-        searcher.sendMsg(Classes.Terrase.showMenu())
+        pass
     elif wpp_message == "2" and wait == True:
         createUser()
     elif wpp_message == "3" and wait == True:
