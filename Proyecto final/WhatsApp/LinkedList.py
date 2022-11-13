@@ -26,6 +26,7 @@ class LinkedList:
         self.ULT = None
 
     def AddNode(self,data):
+        #añade un nuevo nodo
         P = Nodo(data)
         if (self.PTR == None):
             self.PTR = P
@@ -35,6 +36,7 @@ class LinkedList:
             self.ULT = P 
 
     def Recorrido(self):
+        #recorre la lista
         P = self.PTR
         while(P != None):
             print(P.data, end="->")
@@ -68,12 +70,10 @@ class LinkedListUser(LinkedList):
         P = self.PTR
         try:
             while P.data != None:
-           
                 if P.data == data :
                     a = P.Wallet
                     break
                 P = P.next
-           
         except AttributeError:
             a = "El usuario no existe"
         return a
@@ -101,7 +101,30 @@ class LinkedListUser(LinkedList):
             data = data.replace(a[0]+","+a[1]+","+a[2], a[0]+","+a[1]+","+newData + "\n")
         with open(file, "w") as f:
                 f.write(data)
-    
+
+#abra cadabra para crear el domicilio 
+#TODO
+
+class pedido(Nodo):
+    def __init__(self, data):
+        super().__init__(data)
+
+class LinkedListDomicilio (LinkedList):
+    def __init__(self, name, ce):
+        super().__init__()
+        self.name = name
+        self.ce = ce 
+        #self.domicilio = Domicilio()
+        self.domicilio = LinkedListDomicilio
+        P = pedido ()
+        if (self.PTR == None):
+            self.PTR = P
+            self.ULT = P
+        else:
+            self.ULT.next = P
+            self.ULT = P
+#--------------------------
+
 class Items(Nodo):
     def __init__(self, number, data, price):
         super().__init__(data)
