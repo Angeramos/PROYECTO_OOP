@@ -70,6 +70,21 @@ class LinkedListUser(LinkedList):
                 a = "El usuario no existe"
         return a
 
+class LinkedListMenu(LinkedList):
+    def AddNodeItem(self, number, data, price):
+        P = Item (number,data, price)
+        if (self.PTR == None):
+            self.PTR = P
+            self.ULT = P 
+        else:
+            self.ULT.next = P
+            self.ULT = P
+class Item(Nodo):
+    def _init_(self, number, data, price):
+        super()._init_(data)
+        self.number = number
+        self.price = price
+
 def fillUserList(list):
     f = open(r"PROYECTO_OOP\Proyecto final\WhatsApp\users.csv", "r")
     for line in f.readlines():
