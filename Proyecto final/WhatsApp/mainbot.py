@@ -49,7 +49,11 @@ class buscador:
 
 searcher = buscador()
 Users = LinkedList.LinkedListUser()
+Domiciliarios = LinkedList.LinkedListDomiciliario()
+Menu = LinkedList.LinkedListMenu()
 Users.fillUserList()
+Menu.fillMenu()
+
 def createUser():
     #crea el usuario
     searcher.sendMsg("Desea crear cuenta de usuario o domiciliario?\n 1. Usuario\n 2. Domiciliario\n")
@@ -57,20 +61,19 @@ def createUser():
     searcher.searchTextBubble
     searcher.sendMsg("Digite su codigo estudiantil\n")
     CE = searcher.readMsg()
+    searcher.sendMsg("Como es su nombre?\n")
+    Name = searcher.readMsg()
     if (CE != None) and (Users.search(CE) == None):
         if a == "1":
-            searcher.sendMsg("Como es su nombre?\n")
-            Name = searcher.readMsg()
             Users.AddUserNode(CE, Name, "0")
             Users.addUserToFile(r"PROYECTO_OOP\Proyecto final\WhatsApp\users.csv")
             print(Users)
         if a == "2":
-            pass
+            Domiciliarios.AddDomiciliarioNode(CE, Name)
+            #add to file
     else:
         searcher.sendMsg("El usuario ya existe")
     
-    
-
 while __name__ == "__main__":
     #main
     print(Users)

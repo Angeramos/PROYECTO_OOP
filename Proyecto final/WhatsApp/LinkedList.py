@@ -114,28 +114,46 @@ class LinkedListUser(LinkedList):
         with open(file, "w") as f:
                 f.write(data)
 
-#abra cadabra para crear el domicilio 
-#TODO
+class Domiciliario(Nodo):
+    def __init__(self, data, Name):
+        super().__init__(data)
+        self.Name = Name
+        self.Pedidos = LinkedListPedidos()
 
-class pedido(Nodo):
+class Pedido(Nodo):
     def __init__(self, data):
         super().__init__(data)
 
-class LinkedListDomicilio (LinkedList):
-    def __init__(self, name, ce):
-        super().__init__()
-        self.name = name
-        self.ce = ce 
-        #self.domicilio = Domicilio()
-        self.domicilio = LinkedListDomicilio
-        P = pedido ()
+class LinkedListPedidos():
+    def AddPedidoNode(self, data):
+        P = Pedido(data)
         if (self.PTR == None):
             self.PTR = P
             self.ULT = P
         else:
             self.ULT.next = P
             self.ULT = P
-#--------------------------
+
+class LinkedListDomiciliario (LinkedList):
+    def AddDomiciliarioNode(self, data, Name):
+        P = Domiciliario(data, Name)
+        if (self.PTR == None):
+            self.PTR = P
+            self.ULT = P
+        else:
+            self.ULT.next = P
+            self.ULT = P
+    def search(self, data):
+        P = self.PTR
+        while (str(P.data) != data) or P.data != None:
+            P = P.next
+        return P
+    def fillDomiciliarioList(self):
+        f = open(r"Proyecto final\WhatsApp\Domiciliarios.csv", "r")
+        for line in f.readlines():
+            a = line.split(",")
+            self.AddUserNode(a[0], a[1], a[2])
+        f.close()
 
 class Items(Nodo):
     """
