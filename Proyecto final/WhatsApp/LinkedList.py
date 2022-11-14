@@ -154,6 +154,12 @@ class LinkedListDomiciliario (LinkedList):
             a = line.split(",")
             self.AddUserNode(a[0], a[1], a[2])
         f.close()
+    def addUserToFile(file, CE, Name):
+        P = list.ULT
+        f = open(file, "a")
+        f.write("\n")
+        f.write(CE + "," + Name + ',' + "0")
+        f.close()
 
 class Items(Nodo):
     """
@@ -201,14 +207,11 @@ class LinkedListMenu(LinkedList):
                 a = line.split(",")
                 self.AddNodeItem(a[0], a[1], a[2]) 
             f.close()
-
-a = LinkedListUser()
-Terrase = LinkedListMenu()
-Terrase.fillMenu()
-a.fillUserList()
-a.PTR.cart.AddNodeCart(Terrase.PTR.data, Terrase.PTR.price)
-
-a.PTR.Wallet = int(a.PTR.Wallet) - int(a.PTR.showCartTotal())
-
-print(a.PTR.cart)
-print(a.PTR.Wallet)
+    #Mostrar menu
+    def showMenu(self):
+        P = self.PTR
+        menu = ""
+        while P!=None:
+            menu = menu + P.number + ". " + P.data + " - " + P.price + "\n"
+            P = P.next
+        return menu    

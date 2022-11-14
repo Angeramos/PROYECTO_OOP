@@ -53,6 +53,7 @@ Domiciliarios = LinkedList.LinkedListDomiciliario()
 Menu = LinkedList.LinkedListMenu()
 Users.fillUserList()
 Menu.fillMenu()
+Domiciliarios.fillDomiciliarioList()
 
 def createUser():
     #crea el usuario
@@ -66,11 +67,11 @@ def createUser():
     if (CE != None) and (Users.search(CE) == None):
         if a == "1":
             Users.AddUserNode(CE, Name, "0")
-            Users.addUserToFile(r"PROYECTO_OOP\Proyecto final\WhatsApp\users.csv")
+            Users.addUserToFile(r"PROYECTO_OOP\Proyecto final\WhatsApp\users.csv", CE, Name)
             print(Users)
         if a == "2":
             Domiciliarios.AddDomiciliarioNode(CE, Name)
-            #add to file
+            Domiciliarios.addUserToFile(r"Proyecto final\WhatsApp\Domiciliarios.csv", CE, Name)
     else:
         searcher.sendMsg("El usuario ya existe")
     
@@ -79,18 +80,20 @@ while __name__ == "__main__":
     print(Users)
     searcher.searchTextBubble
     searcher.sendMsg("Bienvenido!\n1. Realizar pedido\n2. Crear usuario\n3. Ver saldo\n4. Salir\n")
-    wait = False
     wpp_message = searcher.readMsg()
     wait = True
     if wpp_message == "1" and wait == True:
-        pass
+        searcher.sendMsg(Menu.showMenu())
     elif wpp_message == "2" and wait == True:
         createUser()
     elif wpp_message == "3" and wait == True:
-        searcher.sendMsg("Coming Soon")
+        searcher.sendMsg("Ingrese su codigo estudiantil")
+        saldo = searcher.readMsg()
+        User = Users.search()
+        searcher.sendMsg("Su saldo actual es: " + User.Wallet)
     elif wpp_message == "4" and wait == True:
-        chatOn = False
         searcher.sendMsg("Muchas Gracias!\n")
+        break
     else:
         wpp_message = searcher.readMsg()
         wait = False
