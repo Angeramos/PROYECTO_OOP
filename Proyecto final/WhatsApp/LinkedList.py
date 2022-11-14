@@ -20,9 +20,9 @@ class Usuario(Nodo):
         self.cart = LinkedListCart()
     def showCartTotal(self):
         P = self.cart.PTR
-        Total = 0
+        Total = "0"
         while P != None:
-            Total = Total + int(P.price)
+            Total = int(Total) + int(P.price)
             P = P.next
         return Total    
 
@@ -95,8 +95,8 @@ class LinkedListUser(LinkedList):
             a = line.split(",")
             self.AddUserNode(a[0], a[1], a[2])
         f.close()
-    def addUserToFile(file, CE, Name):
-        P = list.ULT
+    def addUserToFile(self, file, CE, Name):
+        P = self.ULT
         f = open(file, "a")
         f.write("\n")
         f.write(CE + "," + Name + ',' + "0")
@@ -121,18 +121,37 @@ class Domiciliario(Nodo):
         self.Pedidos = LinkedListPedidos()
 
 class Pedido(Nodo):
-    def __init__(self, data):
+    def __init__(self, data, total):
         super().__init__(data)
+        self.total = total
+    
+    def __repr__(self):
+        return str(self.data + " - " + self.total)
 
-class LinkedListPedidos():
-    def AddPedidoNode(self, data):
-        P = Pedido(data)
+class LinkedListPedidos(LinkedList):
+    def AddPedidoNode(self, data, total):
+        P = Pedido(data, total)
         if (self.PTR == None):
             self.PTR = P
             self.ULT = P
         else:
             self.ULT.next = P
             self.ULT = P
+    def __len__(self):
+        P = self.PTR
+        count = 0
+        while P != None:
+            count = count + 1
+            P = P.next
+        return count
+    def __repr__(self):
+        respuesta = ""
+        P = self.PTR
+        while(P != None):
+            respuesta = respuesta + str(P.data) + "  Total = " + str(P.total) + "->"
+            P = P.next
+        respuesta = respuesta + "None"
+        return respuesta
 
 class LinkedListDomiciliario (LinkedList):
     def AddDomiciliarioNode(self, data, Name):
@@ -152,7 +171,7 @@ class LinkedListDomiciliario (LinkedList):
         f = open(r"Proyecto final\WhatsApp\Domiciliarios.csv", "r")
         for line in f.readlines():
             a = line.split(",")
-            self.AddUserNode(a[0], a[1], a[2])
+            self.AddDomiciliarioNode(a[0], a[1])
         f.close()
     def addUserToFile(file, CE, Name):
         P = list.ULT
@@ -160,6 +179,15 @@ class LinkedListDomiciliario (LinkedList):
         f.write("\n")
         f.write(CE + "," + Name + ',' + "0")
         f.close()
+    def searchLess(self):
+        min = self.PTR.Pedidos.__len__()
+        P = self.PTR.Pedidos
+        ChosenOne = P
+        while P != None:
+            if min < self.PTR.Pedidos.__len__():
+                min = self.PTR.Pedidos.__len__()
+                ChosenOne = self.PTR
+        return ChosenOne
 
 class Items(Nodo):
     """
@@ -190,6 +218,13 @@ class LinkedListCart(LinkedList):
         else:
             self.ULT.next = P
             self.ULT = P
+    def __len__(self):
+        P = self.PTR
+        count = 0
+        while P != None:
+            count = count + 1
+            P = P.next
+        return count
 
 class LinkedListMenu(LinkedList):
 
@@ -215,3 +250,29 @@ class LinkedListMenu(LinkedList):
             menu = menu + P.number + ". " + P.data + " - " + P.price + "\n"
             P = P.next
         return menu    
+
+Users = LinkedListUser()
+Domicili = LinkedListDomiciliario()
+Domicili.fillDomiciliarioList()
+Users.fillUserList()
+Users.AddUserNode("1-938198", "Carlos Del Toro", "10000")
+Users.addUserToFile(r"Proyecto final\WhatsApp\users.csv","1-938198", "Carlos Del Toro")
+Users.PTR.cart.AddNodeCart("Perro caliente", "5400")
+Users.PTR.cart.AddNodeCart("Perro caliente", "5400")
+Users.PTR.cart.AddNodeCart("Perro caliente", "5400")
+
+item = Users.PTR.cart.PTR
+a = 1
+ped = ""
+while a <= Users.PTR.cart.__len__():
+    
+    if a != Users.PTR.cart.__len__():
+        ped = ped + item.data + ","
+    else: 
+        ped = ped  + item.data
+    item = item.next
+    a = a + 1
+
+Domicili.PTR.Pedidos.AddPedidoNode(ped, Users.PTR.showCartTotal())
+
+print(Domicili.PTR.Pedidos)
