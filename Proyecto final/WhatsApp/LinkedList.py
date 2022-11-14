@@ -75,7 +75,7 @@ class LinkedListUser(LinkedList):
             self.ULT = P
     def search(self, data):
         P = self.PTR
-        while P.data != data:
+        while (str(P.data) != data) or P.data != None:
             P = P.next
         return P
     def showBalance(self, data):
@@ -95,11 +95,11 @@ class LinkedListUser(LinkedList):
             a = line.split(",")
             self.AddUserNode(a[0], a[1], a[2])
         f.close()
-    def addUserToFile(file, list):
+    def addUserToFile(file, CE, Name):
         P = list.ULT
         f = open(file, "a")
         f.write("\n")
-        f.write(P.data + "," + P.Name + ',' + P.Wallet)
+        f.write(CE + "," + Name + ',' + "0")
         f.close()
     def updtFile(file, search, newData):
         f = open(file, "r")
@@ -168,7 +168,7 @@ class LinkedListCart(LinkedList):
             self.ULT = P
 
 class LinkedListMenu(LinkedList):
-    
+
     def AddNodeItem(self, number, data, price):
         P = Items(number, data, price)
         if (self.PTR == None):
