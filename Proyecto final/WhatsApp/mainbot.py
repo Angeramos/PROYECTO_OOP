@@ -32,16 +32,19 @@ class buscador:
 
     def readMsg(self):
         #lee el mensaje 
-        sleep (5)
-        buscador.searchTextBubble()
-        pt.moveTo(x+65, y-65, duration=.5)
-        pt.tripleClick()
-        pt.rightClick()
-        sleep (1)
-        pt.moveTo(x+100, y-45, duration=.5)
-        pt.click()
-        msg = pyperclip.paste()
-        print("Mensaje recibido ", msg)
+        msg = None
+        while msg == None:
+            sleep (5)
+            buscador.searchTextBubble()
+            pt.moveTo(x+65, y-65, duration=.5)
+            pt.tripleClick()
+            pt.rightClick()
+            sleep (1)
+            pt.moveTo(x+100, y-45, duration=.5)
+            pt.click()
+            pyperclip.waitForPaste()
+            msg = pyperclip.paste()
+            print("Mensaje recibido ", msg)
         return msg
 
 searcher = buscador()
@@ -54,20 +57,18 @@ def createUser():
     searcher.searchTextBubble
     searcher.sendMsg("Digite su codigo estudiantil\n")
     CE = searcher.readMsg()
-    try:
-        Users.search(CE)
-        if CE != None:
-            if a == "1":
-                searcher.sendMsg("Como es su nombre?\n")
-                Name = searcher.readMsg()
-                Users.AddUserNode(CE, Name, "0")
-                LinkedList.addUserToFile(r"PROYECTO_OOP\Proyecto final\WhatsApp\users.csv", CE, Name, "0")
-            if a == "2":
-                pass
-        else:
-            searcher.sendMsg("El usuario ya existe")
-    except AttributeError:
+    if (CE != None) and (Users.search(CE) == None):
+        if a == "1":
+            searcher.sendMsg("Como es su nombre?\n")
+            Name = searcher.readMsg()
+            Users.AddUserNode(CE, Name, "0")
+            Users.addUserToFile(r"PROYECTO_OOP\Proyecto final\WhatsApp\users.csv")
+            print(Users)
+        if a == "2":
+            pass
+    else:
         searcher.sendMsg("El usuario ya existe")
+    
     
 
 while __name__ == "__main__":
