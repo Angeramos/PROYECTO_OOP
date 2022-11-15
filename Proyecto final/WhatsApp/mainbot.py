@@ -77,14 +77,48 @@ def createUser():
         searcher.sendMsg("El usuario ya existe")
     
 while __name__ == "__main__":
-    #main
-    print(Users)
-    searcher.searchTextBubble
     searcher.sendMsg("Bienvenido!\n1. Realizar pedido\n2. Crear usuario\n3. Ver saldo\n4. Salir\n")
     wpp_message = searcher.readMsg()
     wait = True
     if wpp_message == "1" and wait == True:
-        searcher.sendMsg(Menu.showMenu())
+        searcher.sendMsg("Que desea realizar?\n1. Ver menu\n2. Ver carrito")
+        if searcher.readMsg() == "1":
+            Menu.showMenu()
+            searcher.sendMsg("Desea ordenar algo?\n1. Si\n2. No")
+            wpp_message = searcher.readMsg()
+            if wpp_message == "1":
+                searcher.sendMsg("Digite su Codigo Estudiantil")
+                tempUser = searcher.readMsg()
+                tempUser = Users.search(tempUser)
+                while tempUser == None:
+                    searcher.sendMsg("El usuario no existe, digete el usuario de nuevo")
+                    tempUser = searcher.readMsg()
+                    tempUser = Users.search(tempUser)
+                order = True
+                while order == True:
+                    searcher.sendMsg("Digite la opcion que desea ")
+                    item = Menu.search(searcher.readMsg()) 
+                    if item != None:
+                        tempUser.cart.AddNodeCart(item.number, item.price)
+                    else:
+                        searcher.sendMsg("Este item no existe o no se encuentra disponible por el momento")
+                    searcher.sendMsg("Desea ordenar algo mas?\n1. Si\n2. No")
+                    wpp_message = searcher.readMsg()
+                    if wpp_message == "1":
+                        order = True
+                    elif wpp_message == "2":
+                        order = False
+                        
+        elif searcher.readMsg () == "2":
+            tempUser = searcher.readMsg()
+            searchUser = Users.search(tempUser)
+            if searchUser != None:
+                try:
+                    searchUser.getPedido()
+                    searcher.sendMsg("Que desea realizar?\n1. Pagar")
+                except AttributeError:
+                    searcher.sendMsg("No tiene ningun item en el pedido")
+                
     elif wpp_message == "2" and wait == True:
         createUser()
     elif wpp_message == "3" and wait == True:

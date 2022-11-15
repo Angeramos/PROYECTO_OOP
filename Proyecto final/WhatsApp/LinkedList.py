@@ -25,12 +25,12 @@ class Usuario(Nodo):
             Total = int(Total) + int(P.price)
             P = P.next
         return Total    
-    def getPedido(self):
+    def getPedido(self, User):
         item = self.cart.PTR
-        a = 1
+        a = 1,
         ped = ""
-        while a <= Users.PTR.cart.__len__():
-            if a != Users.PTR.cart.__len__():
+        while a <= User.PTR.cart.__len__():
+            if a != User.PTR.cart.__len__():
                 ped = ped + item.data + ","
             else: 
                 ped = ped  + item.data
@@ -40,6 +40,7 @@ class Usuario(Nodo):
     def payPedido(self):
         if int(self.Wallet) >= int(self.showCartTotal()):
             self.Wallet = int(self.Wallet) - int(self.showCartTotal())
+            LinkedListUser.updtFile(self.data, str(self.Wallet))
         else:
             print("Saldo insuficiente")
 
@@ -173,7 +174,7 @@ class LinkedListPedidos(LinkedList):
         respuesta = respuesta + "None"
         return respuesta
 
-class LinkedListDomiciliario (LinkedList):
+class LinkedListDomiciliario ( LinkedList):
     def AddDomiciliarioNode(self, data, Name):
         P = Domiciliario(data, Name)
         if (self.PTR == None):
@@ -262,7 +263,6 @@ class LinkedListMenu(LinkedList):
                 a = line.split(",")
                 self.AddNodeItem(a[0], a[1], a[2]) 
             f.close()
-    #Mostrar menu
     def showMenu(self):
         P = self.PTR
         menu = ""
@@ -270,21 +270,11 @@ class LinkedListMenu(LinkedList):
             menu = menu + P.number + ". " + P.data + " - " + P.price + "\n"
             P = P.next
         return menu    
-
-Users = LinkedListUser()
-Domicili = LinkedListDomiciliario()
-Domicili.fillDomiciliarioList()
-Users.fillUserList()
-Users.AddUserNode("1-938198", "Carlos Del Toro", "10000")
-Users.addUserToFile(r"Proyecto final\WhatsApp\users.csv","1-938198", "Carlos Del Toro")
-Users.PTR.cart.AddNodeCart("Perro caliente", "5400")
-Users.PTR.cart.AddNodeCart("Perro caliente", "5400")
-Users.PTR.cart.AddNodeCart("Perro caliente", "5400")
-Domicili.PTR.Pedidos.AddPedidoNode(Users.PTR.getPedido(), Users.PTR.showCartTotal())
-print(Users.PTR.Wallet)
-
-#Poner esto en pagar
-bef = Users.PTR.data
-Users.PTR.payPedido()
-Users.updtFile(bef, str(Users.PTR.Wallet))
-print(Users.PTR.Wallet)
+    def search(self, data):
+        P = self.PTR
+        while P != None or P.data!= data:
+            if P.data == data:
+                return P
+            P = P.next
+        if P==None:
+            return None
