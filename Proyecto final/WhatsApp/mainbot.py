@@ -23,7 +23,7 @@ class buscador:
     def searchTextBubble():
         #busca la imagen de texto 
         global x, y
-        position2 = pt.locateOnScreen(r"Proyecto final\WhatsApp\barra_mensajes.png", confidence=.6) 
+        position2 = pt.locateOnScreen(r"Proyecto final\WhatsApp\BarraMensajesNuevas.png", confidence=.6) 
         x = position2 [0]
         y = position2 [1]
         pt.moveTo(x,y, duration=0.5)
@@ -36,6 +36,7 @@ class buscador:
         while msg == None:
             sleep (5)
             buscador.searchTextBubble()
+            print("entro ")
             pt.moveTo(x+65, y-65, duration=.5)
             pt.tripleClick()
             pt.rightClick()
@@ -67,7 +68,7 @@ def createUser():
     if (CE != None) and (Users.search(CE) == None):
         if a == "1":
             Users.AddUserNode(CE, Name, "0")
-            Users.addUserToFile(r"PROYECTO_OOP\Proyecto final\WhatsApp\users.csv", CE, Name)
+            Users.addUserToFile(r"Proyecto final\WhatsApp\users.csv", CE, Name)
             print(Users)
         if a == "2":
             Domiciliarios.AddDomiciliarioNode(CE, Name)
