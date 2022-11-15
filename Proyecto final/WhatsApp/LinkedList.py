@@ -25,6 +25,23 @@ class Usuario(Nodo):
             Total = int(Total) + int(P.price)
             P = P.next
         return Total    
+    def getPedido(self):
+        item = self.cart.PTR
+        a = 1
+        ped = ""
+        while a <= Users.PTR.cart.__len__():
+            if a != Users.PTR.cart.__len__():
+                ped = ped + item.data + ","
+            else: 
+                ped = ped  + item.data
+            item = item.next
+            a = a + 1
+        return ped
+    def payPedido(self):
+        if int(self.Wallet) >= int(self.showCartTotal()):
+            self.Wallet = int(self.Wallet) - int(self.showCartTotal())
+        else:
+            print("Saldo insuficiente")
 
 class LinkedList:
     """
@@ -101,17 +118,17 @@ class LinkedListUser(LinkedList):
         f.write("\n")
         f.write(CE + "," + Name + ',' + "0")
         f.close()
-    def updtFile(file, search, newData):
-        f = open(file, "r")
+    def updtFile(self, search, newData):
+        f = open(r"Proyecto final\WhatsApp\users.csv", "r")
         for line in f.readlines():
             a = line.split(",")
             if a[0] == search:
                 print(a[0])
                 break
-        with open(file, "r") as f:
+        with open(r"Proyecto final\WhatsApp\users.csv", "r") as f:
             data = f.read()
             data = data.replace(a[0]+","+a[1]+","+a[2], a[0]+","+a[1]+","+newData + "\n")
-        with open(file, "w") as f:
+        with open(r"Proyecto final\WhatsApp\users.csv", "w") as f:
                 f.write(data)
 
 class Domiciliario(Nodo):
@@ -260,19 +277,11 @@ Users.addUserToFile(r"Proyecto final\WhatsApp\users.csv","1-938198", "Carlos Del
 Users.PTR.cart.AddNodeCart("Perro caliente", "5400")
 Users.PTR.cart.AddNodeCart("Perro caliente", "5400")
 Users.PTR.cart.AddNodeCart("Perro caliente", "5400")
+Domicili.PTR.Pedidos.AddPedidoNode(Users.PTR.getPedido(), Users.PTR.showCartTotal())
+print(Users.PTR.Wallet)
 
-item = Users.PTR.cart.PTR
-a = 1
-ped = ""
-while a <= Users.PTR.cart.__len__():
-    
-    if a != Users.PTR.cart.__len__():
-        ped = ped + item.data + ","
-    else: 
-        ped = ped  + item.data
-    item = item.next
-    a = a + 1
-
-Domicili.PTR.Pedidos.AddPedidoNode(ped, Users.PTR.showCartTotal())
-
-print(Domicili.PTR.Pedidos)
+#Poner esto en pagar
+bef = Users.PTR.data
+Users.PTR.payPedido()
+Users.updtFile(bef, str(Users.PTR.Wallet))
+print(Users.PTR.Wallet)
