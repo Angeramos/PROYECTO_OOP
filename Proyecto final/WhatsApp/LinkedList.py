@@ -91,10 +91,13 @@ class LinkedListUser(LinkedList):
             self.ULT.next = P
             self.ULT = P
     def search(self, data):
-        P = self.PTR
-        while (str(P.data) != data) or P.data != None:
-            P = P.next
-        return P
+        try:
+            P = self.PTR
+            while (str(P.data) != data) or P.data != None:
+                P = P.next
+            return P
+        except AttributeError:
+            return None
     def showBalance(self, data):
         P = self.PTR
         try:
