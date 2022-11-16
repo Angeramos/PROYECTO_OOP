@@ -4,7 +4,6 @@ from time import sleep
 import pyperclip
 import LinkedList
 sleep (3)
-
 class buscador: 
     def sendMsg(self, texto:str):
         #se encarga de enviar el mensaje
@@ -73,6 +72,7 @@ def createUser():
         if a == "2":
             Domiciliarios.AddDomiciliarioNode(CE, Name)
             Domiciliarios.addUserToFile(r"Proyecto final\WhatsApp\Domiciliarios.csv", CE, Name)
+        searcher.sendMsg("Usuario creado!")
     else:
         searcher.sendMsg("El usuario ya existe")
     
@@ -107,15 +107,18 @@ while __name__ == "__main__":
                     if wpp_message == "1":
                         order = True
                     elif wpp_message == "2":
-                        order = False
-                        
+                        order = False               
         elif searcher.readMsg () == "2":
             tempUser = searcher.readMsg()
             searchUser = Users.search(tempUser)
             if searchUser != None:
                 try:
-                    searchUser.getPedido()
-                    searcher.sendMsg("Que desea realizar?\n1. Pagar")
+                    searcher.sendMsg("Que desea realizar?\n1. Pagar\n2. Eliminar item")
+                    wpp_message = searcher.readMsg()
+                    if wpp_message == "1":
+                        searchUser.payPedido()
+                        P = Domiciliarios.searchLess()
+                        P.AddPedidoNode(searchUser.getPedido(), str(searchUser.showCartTotal()))
                 except AttributeError:
                     searcher.sendMsg("No tiene ningun item en el pedido")
                 
