@@ -94,9 +94,10 @@ class LinkedListUser(LinkedList):
     def search(self, data):
         try:
             P = self.PTR
-            while (str(P.data) != data) or P.data != None:
+            while (P.data != data) or P.data != None:
+                if P.data == data:
+                    return P
                 P = P.next
-            return P
         except AttributeError:
             return None
     def showBalance(self, data):
@@ -185,9 +186,13 @@ class LinkedListDomiciliario ( LinkedList):
             self.ULT = P
     def search(self, data):
         P = self.PTR
-        while (str(P.data) != data) or P.data != None:
-            P = P.next
-        return P
+        try:
+            while P != None or P.data!= data:
+                if P.data == data:
+                    return P
+                P = P.next
+        except AttributeError:
+            return None
     def fillDomiciliarioList(self):
         f = open(r"Proyecto final\WhatsApp\Domiciliarios.csv", "r")
         for line in f.readlines():
@@ -195,7 +200,6 @@ class LinkedListDomiciliario ( LinkedList):
             self.AddDomiciliarioNode(a[0], a[1])
         f.close()
     def addUserToFile(file, CE, Name):
-        P = list.ULT
         f = open(file, "a")
         f.write("\n")
         f.write(CE + "," + Name + ',' + "0")
@@ -272,9 +276,10 @@ class LinkedListMenu(LinkedList):
         return menu    
     def search(self, data):
         P = self.PTR
-        while P != None or P.data!= data:
-            if P.data == data:
-                return P
-            P = P.next
-        if P==None:
+        try:
+            while P != None:
+                if P.number == data:
+                    return P
+                P = P.next
+        except AttributeError:
             return None
