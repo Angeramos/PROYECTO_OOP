@@ -20,17 +20,17 @@ class Usuario(Nodo):
         self.cart = LinkedListCart()
     def showCartTotal(self):
         P = self.cart.PTR
-        Total = "0"
+        Total = 0
         while P != None:
-            Total = int(Total) + int(P.price)
+            Total = Total + int(P.price)
             P = P.next
-        return Total    
-    def getPedido(self, User):
+        return str(Total) 
+    def getPedido(self):
         item = self.cart.PTR
-        a = 1,
+        a = 1
         ped = ""
-        while a <= User.PTR.cart.__len__():
-            if a != User.PTR.cart.__len__():
+        while a <= self.cart.__len__():
+            if a != self.cart.__len__():
                 ped = ped + item.data + ","
             else: 
                 ped = ped  + item.data
@@ -41,8 +41,9 @@ class Usuario(Nodo):
         if int(self.Wallet) >= int(self.showCartTotal()):
             self.Wallet = int(self.Wallet) - int(self.showCartTotal())
             LinkedListUser.updtFile(self.data, str(self.Wallet))
+            print("Entro")
         else:
-            print("Saldo insuficiente")
+            pass
 
 class LinkedList:
     """
@@ -112,7 +113,7 @@ class LinkedListUser(LinkedList):
             a = "El usuario no existe"
         return a
     def fillUserList(self):
-        f = open(r"Proyecto final\WhatsApp\users.csv", "r")
+        f = open(r"Proyecto final\WhatsApp\src\Data\users.csv", "r")
         for line in f.readlines():
             a = line.split(",")
             self.AddUserNode(a[0], a[1], a[2])
@@ -121,19 +122,19 @@ class LinkedListUser(LinkedList):
         P = self.ULT
         f = open(file, "a")
         f.write("\n")
-        f.write(CE + "," + Name + ',' + "0")
+        f.write(CE + "," + Name + ',' + "50000")
         f.close()
-    def updtFile(self, search, newData):
-        f = open(r"Proyecto final\WhatsApp\users.csv", "r")
+    def updtFile(search, newData):
+        f = open(r"Proyecto final\WhatsApp\src\Data\users.csv", "r")
         for line in f.readlines():
             a = line.split(",")
             if a[0] == search:
                 print(a[0])
                 break
-        with open(r"Proyecto final\WhatsApp\users.csv", "r") as f:
+        with open(r"Proyecto final\WhatsApp\src\Data\users.csv", "r") as f:
             data = f.read()
             data = data.replace(a[0]+","+a[1]+","+a[2], a[0]+","+a[1]+","+newData + "\n")
-        with open(r"Proyecto final\WhatsApp\users.csv", "w") as f:
+        with open(r"Proyecto final\WhatsApp\src\Data\users.csv", "w") as f:
                 f.write(data)
 
 class Domiciliario(Nodo):
@@ -194,7 +195,7 @@ class LinkedListDomiciliario ( LinkedList):
         except AttributeError:
             return None
     def fillDomiciliarioList(self):
-        f = open(r"Proyecto final\WhatsApp\Domiciliarios.csv", "r")
+        f = open(r"Proyecto final\WhatsApp\src\Data\Domiciliarios.csv", "r")
         for line in f.readlines():
             a = line.split(",")
             self.AddDomiciliarioNode(a[0], a[1])
@@ -206,12 +207,13 @@ class LinkedListDomiciliario ( LinkedList):
         f.close()
     def searchLess(self):
         min = self.PTR.Pedidos.__len__()
-        P = self.PTR.Pedidos
+        P = self.PTR
         ChosenOne = P
         while P != None:
-            if min < self.PTR.Pedidos.__len__():
-                min = self.PTR.Pedidos.__len__()
-                ChosenOne = self.PTR
+            if min < P.Pedidos.__len__():
+                min = P.Pedidos.__len__()
+                ChosenOne = P
+            P = P.next
         return ChosenOne
 
 class Items(Nodo):
@@ -262,7 +264,7 @@ class LinkedListMenu(LinkedList):
             self.ULT.next = P
             self.ULT = P
     def fillMenu(self):
-            f = open(r"Proyecto final\WhatsApp\MenuTerrasse.csv", "r")
+            f = open(r"Proyecto final\WhatsApp\src\Data\MenuTerrasse.csv", "r")
             for line in f.readlines():
                 a = line.split(",")
                 self.AddNodeItem(a[0], a[1], a[2]) 
@@ -283,3 +285,4 @@ class LinkedListMenu(LinkedList):
                 P = P.next
         except AttributeError:
             return None
+
