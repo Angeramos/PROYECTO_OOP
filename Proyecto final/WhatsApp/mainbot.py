@@ -40,11 +40,11 @@ class buscador:
         while msg == None:
             sleep (15)
             buscador.searchTextBubble()
-            pt.moveTo(x+400, y-65, duration=.5)
+            pt.moveTo(x+65, y-65, duration=.5)
             pt.tripleClick()
             pt.rightClick()
             sleep (1)
-            pt.moveTo(x+420, y-300, duration=.5)
+            pt.moveTo(x+100, y-45, duration=.5)
             pt.doubleClick()
             pyperclip.waitForPaste()
             msg = pyperclip.paste()
