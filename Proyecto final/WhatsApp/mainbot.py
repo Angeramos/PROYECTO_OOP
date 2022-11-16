@@ -4,7 +4,7 @@ import pyperclip
 import LinkedList
 sleep (3)
 class buscador: 
-    def sendMsg(self, texto:str):
+    def sendMsg(self, texto:str) -> None:
         """
         Envia cualquier tipo de str por whatsapp
         """
@@ -20,19 +20,20 @@ class buscador:
                 pt.hotkey("shift", "enter")
         pt.press("enter")
         
-    def searchTextBubble():
+    def searchTextBubble() -> None:
         """
         Busca la barra de texto de whatsapp
         """
         global x, y
-        position2 = pt.locateOnScreen(r"Proyecto final\WhatsApp\src\Images\BarraMensajesV2.png", confidence=.4) 
+        position2 = pt.locateOnScreen(r"Proyecto final\WhatsApp\src\Images\
+                                        BarraMensajesV2.png", confidence=.4) 
         x = position2[0]    
         y = position2[1]
         pt.moveTo(x,y, duration=0.5)
         pt.moveTo(x,y, duration=.5)
         pt.moveTo(x+200, y-(-0), duration=.5)
 
-    def readMsg(self):
+    def readMsg(self) -> str:
         """
         Mediante coordenadas copia el mensaje 
         """ 
@@ -59,11 +60,12 @@ Users.fillUserList()
 Menu.fillMenu()
 Domiciliarios.fillDomiciliarioList()
 
-def createUser():
+def createUser() -> None:
     """
     Funcion para crear un usuario de tipo Usuario o Domiciliario
     """
-    searcher.sendMsg("Desea crear cuenta de usuario o domiciliario?\n 1. Usuario\n 2. Domiciliario\n")
+    searcher.sendMsg("Desea crear cuenta de usuario o domiciliario?",
+                    "\n 1. Usuario\n 2. Domiciliario\n")
     a = searcher.readMsg()
     while a !="1" and a!="2":
         searcher.sendMsg("La respuesta no es valida, digitela de nuevo\n")
@@ -79,15 +81,18 @@ def createUser():
             Users.addUserToFile(r"Proyecto final\WhatsApp\users.csv", CE, Name)
         if a == "2":
             Domiciliarios.AddDomiciliarioNode(CE, Name)
-            Domiciliarios.addUserToFile(r"Proyecto final\WhatsApp\Domiciliarios.csv", CE, Name)
+            Domiciliarios.addUserToFile(r"Proyecto final\WhatsApp\
+                                        Domiciliarios.csv", CE, Name)
         searcher.sendMsg("Usuario creado!\n")
     else:
         searcher.sendMsg("El usuario ya existe\n")
     
 while __name__ == "__main__":
-    searcher.sendMsg("Bienvenido!\n1. Pedidos\n2. Crear usuario\n3. Ver saldo\n4. Salir\n")
+    searcher.sendMsg("Bienvenido!\n1. Pedidos\n2. Crear usuario",
+                    "\n3. Ver saldo\n4. Salir\n")
     wpp_message = searcher.readMsg()
-    while wpp_message != "1" and wpp_message != "2" and wpp_message != "3" and wpp_message != "4":
+    while wpp_message != "1" and wpp_message != \
+        "2" and wpp_message != "3" and wpp_message != "4":
         searcher.sendMsg("La respuesta no es valida, digitela de nuevo\n")
         wpp_message = searcher.readMsg()
     wait = True
@@ -126,7 +131,8 @@ while __name__ == "__main__":
                         tempUser.cart.AddNodeCart(item.number, item.price)
                         searcher.sendMsg("El item se agrego satisfactoriamente!\n")
                     elif item == None:
-                        searcher.sendMsg("Este item no existe o no se encuentra disponible por el momento\n")
+                        searcher.sendMsg("Este item no existe o no se",
+                                "encuentra disponible por el momento\n")
                     searcher.sendMsg("Desea ordenar algo mas?\n1. Si\n2. No\n")
                     wpp_message = searcher.readMsg()
                     if wpp_message == "1":

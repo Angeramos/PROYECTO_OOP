@@ -11,9 +11,10 @@ class Nodo:
 
 class Usuario(Nodo):
     """
-    Clase Usuario heredada de nodo, esta maneja los datos del usuario para luego insertarlos en una LinkedList
+    Clase Usuario heredada de nodo, esta maneja los datos 
+    del usuario para luego insertarlos en una LinkedList
     """
-    def __init__(self, data, Name, Wallet):
+    def __init__(self, data, Name: str, Wallet: str) -> None:
         super().__init__(data)
         self.Name = Name
         self.Wallet = Wallet
@@ -45,7 +46,8 @@ class Usuario(Nodo):
         return ped
     def payPedido(self):
         """
-        Paga los productos que tenga el nodo usuario en cart, descontando de su wallet el valor total
+        Paga los productos que tenga el nodo usuario en cart, 
+        descontando de su wallet el valor total
         """
         if int(self.Wallet) >= int(self.showCartTotal()):
             self.Wallet = int(self.Wallet) - int(self.showCartTotal())
@@ -91,9 +93,10 @@ class LinkedList:
     
 class LinkedListUser(LinkedList):
     """
-    LinkedList creada con el proposito de manejar los datos del usuario usando los nodos de tipo Usuario
+    LinkedList creada con el proposito de manejar los 
+    datos del usuario usando los nodos de tipo Usuario
     """
-    def AddUserNode(self, data, Name, Wallet):
+    def AddUserNode(self, data, Name: str, Wallet: str) -> None:
         """Añade un nodo de tipo usuario"""
         P = Usuario(data, Name, Wallet)
         if (self.PTR == None):
@@ -131,7 +134,7 @@ class LinkedListUser(LinkedList):
             a = line.split(",")
             self.AddUserNode(a[0], a[1], a[2])
         f.close()
-    def addUserToFile(self, file, CE, Name):
+    def addUserToFile(self, file, CE: str, Name: str)  -> None:
         """Añade al final del archivo, aquellos usuarios recien creados"""
         P = self.ULT
         f = open(file, "a")
@@ -222,14 +225,15 @@ class LinkedListDomiciliario ( LinkedList):
             a = line.split(",")
             self.AddDomiciliarioNode(a[0], a[1])
         f.close()
-    def addUserToFile(file, CE, Name):
+    def addUserToFile(file, CE: int, Name:str):
         """Añade al final del archivo, aquellos usuarios recien creados"""
         f = open(file, "a")
         f.write("\n")
         f.write(CE + "," + Name + ',' + "0")
         f.close()
     def searchLess(self):
-        """Busca aquel domiciliario que tenga la menor cantidad de pedidos, esto para que asi se den pedidos por cantidad iguales"""
+        """Busca aquel domiciliario que tenga la menor cantidad de pedidos, 
+        esto para que asi se den pedidos por cantidad iguales"""
         min = self.PTR.Pedidos.__len__()
         P = self.PTR
         ChosenOne = P
@@ -242,9 +246,10 @@ class LinkedListDomiciliario ( LinkedList):
 
 class Items(Nodo):
     """
-    Clase Items heredada de Nodo, esta tiene guardados los datos de cada comida del menu
+    Clase Items heredada de Nodo, 
+    esta tiene guardados los datos de cada comida del menú
     """
-    def __init__(self, number, data, price):
+    def __init__(self, number: str, data:str, price: str) -> None:
         super().__init__(data)
         self.number = number
         self.price = price
@@ -259,7 +264,8 @@ class Cart(Nodo):
 
 class LinkedListCart(LinkedList):
     """
-    LinkedList para guardar los items que el usario tenga en su carrito mediante los nodos Cart
+    LinkedList para guardar los items que el usario 
+    tenga en su carrito mediante los nodos Cart
     """
     def AddNodeCart(self, data, price):
         """Añade nodos del tipo cart a la lista enlazada"""
