@@ -44,7 +44,7 @@ class buscador:
             pt.tripleClick()
             pt.rightClick()
             sleep (1)
-            pt.moveTo(x+100, y-45, duration=.5)
+            pt.moveTo(x+100, y-250, duration=.5)
             pt.doubleClick()
             pyperclip.waitForPaste()
             msg = pyperclip.paste()
@@ -157,10 +157,13 @@ while __name__ == "__main__":
     elif wpp_message == "2" and wait == True:
         createUser()
     elif wpp_message == "3" and wait == True:
-        searcher.sendMsg("Ingrese su codigo estudiantil\n")
-        saldo = searcher.readMsg()
-        User = Users.search(saldo)
-        searcher.sendMsg("Su saldo actual es: " + User.Wallet)
+        try:
+            searcher.sendMsg("Ingrese su codigo estudiantil\n")
+            saldo = searcher.readMsg()
+            User = Users.search(saldo)
+            searcher.sendMsg("Su saldo actual es: " + User.Wallet)  
+        except AttributeError:
+            searcher.sendMsg("El usuario no existe")  
     elif wpp_message == "4" and wait == True:
         searcher.sendMsg("Muchas Gracias!\n")
         break
